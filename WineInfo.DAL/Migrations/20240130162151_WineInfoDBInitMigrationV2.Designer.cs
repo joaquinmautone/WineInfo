@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WineInfo.DAL.DbContexts;
 
 namespace WineInfo.DAL.Migrations
 {
     [DbContext(typeof(WineInfoContext))]
-    partial class WineInfoContextModelSnapshot : ModelSnapshot
+    [Migration("20240130162151_WineInfoDBInitMigrationV2")]
+    partial class WineInfoDBInitMigrationV2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -15,6 +15,9 @@ namespace WineInfo.DAL.Persistence
         {
             builder.HasKey(p => p.UserId);
 
+            builder.HasIndex(u => u.UserName)
+                .IsUnique();
+
             builder.Property(p => p.UserName)
                 .HasMaxLength(50)
                 .IsRequired();
@@ -28,7 +31,6 @@ namespace WineInfo.DAL.Persistence
                 .IsRequired();
 
             builder.Property(p => p.Password)
-                .HasMaxLength(50)
                 .IsRequired();
         }
     }

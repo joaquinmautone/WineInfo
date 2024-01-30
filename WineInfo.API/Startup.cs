@@ -17,6 +17,7 @@ using Microsoft.IdentityModel.Tokens;
 using WineInfo.DAL.Repositories;
 using WineInfo.DAL.Infrastructure;
 using WineInfo.Services;
+using WineInfo.Services.Security;
 
 namespace WineInfo.API
 {
@@ -35,6 +36,9 @@ namespace WineInfo.API
             services.AddScoped<IDatabaseFactory, DatabaseFactory>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IMesurementRepository, MesurementRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IPasswordHasher, PasswordHasher>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IMesurementService, MesurementService>();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

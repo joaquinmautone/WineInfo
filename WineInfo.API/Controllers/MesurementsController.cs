@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WineInfo.API.Models;
-using WineInfo.Entities;
 using WineInfo.Services;
 
 namespace WineInfo.API.Controllers
 {
+    [Authorize]
     [Route("api/measurements")]
     [ApiController]
     public class MeasurementsController : ControllerBase
@@ -31,25 +32,34 @@ namespace WineInfo.API.Controllers
             return Ok(mesurementDto);
         }
 
-        [HttpGet("{id}")]
-        public ActionResult<string> GetMeasurement(int id)
+        [HttpGet("{id}", Name = "GetMeasurement")]
+        public async Task<ActionResult<MesurementDto>> GetMeasurement(int id)
         {
-            return "value";
+            var mesurements = await mesurementService.GetMesurementByIdAsync(id);
+            MesurementDto mesurementDto = mapper.Map<MesurementDto>(mesurements);
+
+            return Ok(mesurementDto);
         }
 
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<MesurementDto>> Post([FromBody] MesurementDto mesurement)
         {
-        }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+            var mesurementEntity = mapper.Map<Entities.Mesurement>(mesurement);
+            var response = await mesurementService.AddMesurementAsync(mesurementEntity);
 
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            if (!response.Success)
+            {
+                return BadRequest(response.Message);
+            }
+
+            mesurement = mapper.Map<MesurementDto>(response.Mesurement);
+
+            return CreatedAtRoute("GetMeasurement", new { id = response.Mesurement.Id }, mesurement);
         }
     }
 }

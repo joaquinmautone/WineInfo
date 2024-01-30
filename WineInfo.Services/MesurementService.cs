@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using WineInfo.DAL.Infrastructure;
 using WineInfo.DAL.Repositories;
 using WineInfo.Entities;
+using WineInfo.Services.Communication;
 
 namespace WineInfo.Services
 {
@@ -19,12 +20,12 @@ namespace WineInfo.Services
             this.unitOfWork = unitOfWork;
         }
 
-        public Mesurement AddMesurement(Mesurement mesurement)
+        public async Task<MesurementResponse> AddMesurementAsync(Mesurement mesurement)
         {
-            repository.Add(mesurement);
+            mesurement = await repository.AddAsync(mesurement);
             SaveChanges();
 
-            return mesurement;
+            return new MesurementResponse(true, null, mesurement);
         }
 
         public void DeleteMesurement(int id)
@@ -35,9 +36,9 @@ namespace WineInfo.Services
             SaveChanges(); 
         }
 
-        public Mesurement GetMesurementById(int id)
+        public async Task<Mesurement> GetMesurementByIdAsync(int id)
         {
-            return repository.GetById(id); 
+            return await repository.GetByIdAsync(id); 
         }
 
         public async Task<IEnumerable<Mesurement>> GetMesurementsAsync()

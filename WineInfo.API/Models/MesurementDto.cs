@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,6 +16,8 @@ namespace WineInfo.API.Models
         public int Temperature { get; set; }
         public int Gradation { get; set; }
         public int PH { get; set; }
+
+        [StringLength(4000)]
         public string Observations { get; set; } = string.Empty;
     }
 }
