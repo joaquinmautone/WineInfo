@@ -9,6 +9,8 @@ namespace WineInfo.Entities
         [Description("Merlot")]
         Merlot = 2,
         [Description("Cabernet Sauvignon")]
-        CabernetSauvignon = 3
+        CabernetSauvignon = 3,
+        [Description("Chardonnay")]
+        Chardonnay = 4
     }
 }

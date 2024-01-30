@@ -12,7 +12,5 @@ namespace WineInfo.Services
         Task<IEnumerable<Mesurement>> GetMesurementsAsync();
         Task<MesurementResponse> AddMesurementAsync(Mesurement mesurement);
         Task<Mesurement> GetMesurementByIdAsync(int id);
-        Mesurement UpdateMesurement(Mesurement mesurement);
-        void DeleteMesurement(int id);
     }
 }

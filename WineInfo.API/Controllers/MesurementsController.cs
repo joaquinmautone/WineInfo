@@ -9,7 +9,7 @@ using WineInfo.Services;
 
 namespace WineInfo.API.Controllers
 {
-    [Authorize]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [Route("api/measurements")]
     [ApiController]
     public class MeasurementsController : ControllerBase

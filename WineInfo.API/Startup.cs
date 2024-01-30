@@ -75,7 +75,7 @@ namespace WineInfo.API
 
             app.UseHttpsRedirection();
             app.UseMvc();
-            app.UseAuthentication();            
+            app.UseAuthentication();
         }
     }
 }

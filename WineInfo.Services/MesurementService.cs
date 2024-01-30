@@ -28,14 +28,6 @@ namespace WineInfo.Services
             return new MesurementResponse(true, null, mesurement);
         }
 
-        public void DeleteMesurement(int id)
-        {
-            var equipo = repository.GetById(id);
-            repository.Delete(equipo);
-
-            SaveChanges(); 
-        }
-
         public async Task<Mesurement> GetMesurementByIdAsync(int id)
         {
             return await repository.GetByIdAsync(id); 
@@ -44,14 +36,6 @@ namespace WineInfo.Services
         public async Task<IEnumerable<Mesurement>> GetMesurementsAsync()
         {
             return await repository.GetAllAsync();
-        }
-
-        public Mesurement UpdateMesurement(Mesurement mesurement)
-        {
-            repository.Update(mesurement);
-            SaveChanges();
-
-            return mesurement;
         }
 
         public void SaveChanges()
